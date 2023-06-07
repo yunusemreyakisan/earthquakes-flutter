@@ -22,6 +22,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
+        backgroundColor: Colors.transparent,
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
         items: [
