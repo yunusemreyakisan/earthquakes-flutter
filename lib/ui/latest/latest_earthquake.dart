@@ -1,4 +1,5 @@
 import 'package:earthquakes/components/background/map_image.dart';
+import 'package:earthquakes/components/card/latest_earthquake_card.dart';
 import 'package:earthquakes/data/model/earthquake_model.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +22,11 @@ class _LatestEarthquakeState extends State<LatestEarthquake> {
     _fetchEarthquakeData();
   }
 
+  //Get Data
   Future<void> _fetchEarthquakeData() async {
-    final future = _client.getLastEarthquake(); // Future nesnesini başlatıyoruz
+    final future = _client.getLastEarthquake();
     setState(() {
-      _earthquakeFuture = future; // Future nesnesini güncelliyoruz
+      _earthquakeFuture = future;
     });
   }
 
@@ -37,10 +39,16 @@ class _LatestEarthquakeState extends State<LatestEarthquake> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Earthquake? earthquake = snapshot.data;
-              return Column(
-                mainAxisSize: MainAxisSize.min,
+              return Stack(
                 children: [
                   CustomMapImage(mapImage: NetworkImage(earthquake!.mapImage!)),
+                  LatestEarthquakeCard(
+                    earthquakeDepth: earthquake.depth.toString(),
+                    earthquakeLoc: earthquake!.region.toString(),
+                    earthquakePower: earthquake.magnitude.toString(),
+                    earthquakeDate: earthquake.lastUpdate.toString(),
+                    earthquakeTime: earthquake.time.toString(),
+                  )
                 ],
               );
             } else if (snapshot.hasError) {
@@ -55,8 +63,6 @@ class _LatestEarthquakeState extends State<LatestEarthquake> {
     );
   }
 }
-
-
 
 /*
 const SizedBox(height: 8.0),

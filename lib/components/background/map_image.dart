@@ -10,8 +10,6 @@ class CustomMapImage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    //TODO: Make gradient
-
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
@@ -19,7 +17,6 @@ class CustomMapImage extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: Colors.transparent,
             image: DecorationImage(
               fit: BoxFit.cover,
               image: mapImage,
@@ -28,5 +25,7 @@ class CustomMapImage extends StatelessWidget {
         ),
       ],
     );
+
+
   }
 }
