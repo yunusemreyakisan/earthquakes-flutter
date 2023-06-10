@@ -44,7 +44,7 @@ class _LatestEarthquakeState extends State<LatestEarthquake> {
                   CustomMapImage(mapImage: NetworkImage(earthquake!.mapImage!)),
                   LatestEarthquakeCard(
                     earthquakeDepth: earthquake.depth.toString(),
-                    earthquakeLoc: earthquake!.region.toString(),
+                    earthquakeLoc: earthquake.region.toString(),
                     earthquakePower: earthquake.magnitude.toString(),
                     earthquakeDate: earthquake.lastUpdate.toString(),
                     earthquakeTime: earthquake.time.toString(),
