@@ -86,7 +86,7 @@ class Earthquake {
     _iD = json['ID'];
     _mapImage = json['MapImage'];
     _time = json['Time'];
-    _magnitude = json['Magnitude'];
+    _magnitude = json['Magnitude'].toDouble();
     _magnitudeType = json['MagnitudeType'];
     _latitude = json['Latitude'];
     _longitude = json['Longitude'];
