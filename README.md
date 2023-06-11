@@ -1,16 +1,22 @@
-# earthquakes
+## 📱 Earthquakes Sample
 
-A new Flutter project.
+Example earthquake application on data extraction and listing processes from the internet.
 
-## Getting Started
+#### 🔗 API
+**API:** https://api.berkealp.net/kandilli.html 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### 🧪 Potions Used 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+| **Libraries**           | **Implementation**                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Solomon for Bottom Navigation | salomon_bottom_bar: ^3.3.2 |
+| Dio for API | dio: ^5.2.1 |
+| Flutter Launcher Icons for Launcher Icon | flutter_launcher_icons: ^0.13.1 |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### ▶️ Demo
+| **Android**  | **iOS** |
+| ------------ | ----------- |
+| <video src="https://user-images.githubusercontent.com/116274664/226135171-c3dbad13-91fd-40cd-8e3b-5edbb3cb761f.mov" controls="controls" style="max-width: 730px;"></video> | <video src="https://user-images.githubusercontent.com/116274664/233921204-5de38790-5f0e-47a2-8957-2d1215031170.mov" controls="controls" style="max-width: 730px;"></video> |
+
