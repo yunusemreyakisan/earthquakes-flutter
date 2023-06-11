@@ -5,7 +5,7 @@ import '../../data/model/earthquake_model.dart';
 import '../../data/remote/api/dio/dio_client.dart';
 
 class EarthquakesList extends StatefulWidget {
-  const EarthquakesList({super.key});
+  const EarthquakesList({Key? key}) : super(key: key);
 
   @override
   State<EarthquakesList> createState() => _EarthquakesListState();
@@ -13,59 +13,53 @@ class EarthquakesList extends StatefulWidget {
 
 class _EarthquakesListState extends State<EarthquakesList> {
   final DioClient _client = DioClient();
-  List<Earthquake> earthquakes = [];
+  List<Earthquake> earthquakeList = [];
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _getEarthquakes();
-    print("Liste: $earthquakes");
+    _getEarthquakeData();
   }
 
-  //Get Data
-  Future<List<Earthquake>> _getEarthquakes() async {
-    List<Earthquake> fetchedEarthquakes = await _client.getAllEarthquakes();
-    setState(() {
-      earthquakes = fetchedEarthquakes;
-    });
-    return earthquakes;
+  // Get Earthquake Data
+  Future<void> _getEarthquakeData() async {
+    try {
+      List<Earthquake> earthquakes = await _client.getAllEarthquakes();
+      setState(() {
+        earthquakeList = earthquakes;
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<List<Earthquake>>(
-        future: _getEarthquakes(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            List<Earthquake> earthquakes = snapshot.data ?? [];
-            if (earthquakes.isEmpty) {
-              return const Center(
-                child: Text('No data available.'),
+    return SafeArea(
+      child: Scaffold(
+        body: isLoading
+            ? const Center(
+          child: CircularProgressIndicator(),
+        )
+            : RefreshIndicator(
+          onRefresh: _getEarthquakeData,
+          child: ListView.builder(
+            itemCount: earthquakeList.length,
+            itemBuilder: (context, index) {
+              Earthquake earthquake = earthquakeList[index];
+              return EarthquakeListItem(
+                earthquakeMapImageUrl: earthquake.mapImage!,
+                earthquakeMagnitude: earthquake.magnitude!.toDouble(),
+                earthquakeRegion: earthquake.region!,
               );
-            } else {
-              return ListView.builder(
-                itemCount: earthquakes.length,
-                itemBuilder: (context, index) {
-                  Earthquake earthquake = earthquakes[index];
-                  return EarthquakeListItem(
-                    earthquakeMapImageUrl: earthquake.mapImage!,
-                    earthquakeMagnitude: earthquake.magnitude!.toDouble(),
-                    earthquakeRegion: earthquake.region!,
-                  );
-                },
-              );
-            }
-          }
-        },
+            },
+          ),
+        ),
       ),
     );
   }
