@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LatestEarthquakeCard extends StatelessWidget {
   final String earthquakePower,
@@ -55,9 +56,9 @@ class LatestEarthquakeCard extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 80.0),
                           child: Text(
                             earthquakeLoc,
-                            style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.normal,
+                            style: GoogleFonts.lato(
+                                textStyle:
+                                    Theme.of(context).textTheme.headlineLarge,
                                 color: Colors.white),
                           ),
                         ),
